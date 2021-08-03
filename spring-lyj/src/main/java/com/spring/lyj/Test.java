@@ -7,9 +7,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class Test {
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(LyjConfig.class);
-		ac.register(UserDao.class);
-		UserDao userDao =(UserDao) ac.getBean("userDao");
-		userDao.hello();
+		AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+		ac.register(LyjConfig.class);
+		ac.refresh();
+		System.out.print(ac.getBean("myFactoryBean"));
+//		ac.register(UserDao.class);
+//		UserDao userDao =(UserDao) ac.getBean("userDao");
+//		userDao.hello();
 	}
 }
