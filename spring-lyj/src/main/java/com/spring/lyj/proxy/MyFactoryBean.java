@@ -1,6 +1,7 @@
-package com.spring.lyj;
+package com.spring.lyj.proxy;
 
 
+import com.spring.lyj.proxy.A;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 

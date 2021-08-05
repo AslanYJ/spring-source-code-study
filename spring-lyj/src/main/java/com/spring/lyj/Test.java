@@ -10,9 +10,7 @@ public class Test {
 		AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
 		ac.register(LyjConfig.class);
 		ac.refresh();
-		System.out.print(ac.getBean("myFactoryBean"));
-//		ac.register(UserDao.class);
-//		UserDao userDao =(UserDao) ac.getBean("userDao");
-//		userDao.hello();
+		UserService userService = ac.getBean(UserService.class);
+		System.out.println(userService);
 	}
 }

@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@ComponentScan("com.spring.lyj")
+@ComponentScan({"com.spring.lyj","com.spring.lyj.proxy"})
 public class LyjConfig {
 }
