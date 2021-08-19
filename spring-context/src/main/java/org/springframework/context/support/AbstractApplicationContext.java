@@ -512,6 +512,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		return this.applicationListeners;
 	}
 
+
+	// key :spring容器在启动的时候，可以大概分为几个步骤：扫描 ---> 解析---> 验证--->进入生命周期
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
@@ -529,6 +531,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
+				// 完成了所谓的扫描和解析功能
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -547,6 +550,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				//  验证，进入生命周期
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.

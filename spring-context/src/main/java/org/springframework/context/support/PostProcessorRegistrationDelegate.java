@@ -56,6 +56,7 @@ final class PostProcessorRegistrationDelegate {
 			ConfigurableListableBeanFactory beanFactory, List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
 
 		// Invoke BeanDefinitionRegistryPostProcessors first, if any.
+		// 保存已经执行过的BeanFactoryProcessor
 		Set<String> processedBeans = new HashSet<>();
 
 		if (beanFactory instanceof BeanDefinitionRegistry) {
@@ -113,6 +114,7 @@ final class PostProcessorRegistrationDelegate {
 			while (reiterate) {
 				reiterate = false;
 				postProcessorNames = beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
+				// 这里执行是不符合上述策略的bean扫描。。 （@MapperScan  就是在这里被扫描到。）
 				for (String ppName : postProcessorNames) {
 					if (!processedBeans.contains(ppName)) {
 						currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class));
@@ -122,12 +124,15 @@ final class PostProcessorRegistrationDelegate {
 				}
 				sortPostProcessors(currentRegistryProcessors, beanFactory);
 				registryProcessors.addAll(currentRegistryProcessors);
+				// 执行BeanDefinitionRegistryPostProcessors
 				invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 				currentRegistryProcessors.clear();
 			}
 
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
+			// 执行所有BeanFactoryPostProcessor 包括内置的和Api
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
+
 			invokeBeanFactoryPostProcessors(regularPostProcessors, beanFactory);
 		}
 

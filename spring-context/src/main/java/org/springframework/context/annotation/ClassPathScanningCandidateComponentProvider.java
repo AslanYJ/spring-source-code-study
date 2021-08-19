@@ -312,6 +312,8 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 			return addCandidateComponentsFromIndex(this.componentsIndex, basePackage);
 		}
 		else {
+			// 一般都会走这里，上面那一段的代码是为了优化Spring的扫描速度的。需要加一个jar包才会上面。
+			// key：扫描对应包名下得所有类
 			return scanCandidateComponents(basePackage);
 		}
 	}
