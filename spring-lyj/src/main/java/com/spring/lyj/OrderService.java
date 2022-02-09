@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserService {
-
+public class OrderService {
 	@Autowired
-	OrderService orderService;
+	 UserService userService;
 
-	public UserService() {
-		System.out.println("init userService");
+	public OrderService() {
+		System.out.println("333");
 	}
+
 }

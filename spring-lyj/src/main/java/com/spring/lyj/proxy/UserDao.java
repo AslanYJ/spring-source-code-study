@@ -1,8 +1,8 @@
-package com.spring.lyj;
+package com.spring.lyj.proxy;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class UserDao {
 	public void hello(){
 		System.out.println("Hello,lyj!");

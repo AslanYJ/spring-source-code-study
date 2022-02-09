@@ -840,9 +840,13 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);
 
 		// Trigger initialization of all non-lazy singleton beans...
+		// 对于每一个Bean进行实例化
 		for (String beanName : beanNames) {
+			// 合并Bean.. 貌似挺重要的，但是现在还没用
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+			// 这里回去判断是否是接口，是否是单例，是否需要延迟..一般来说都不需要
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
+				// key:判断是否是factoryBean.. 后续更新
 				if (isFactoryBean(beanName)) {
 					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
 					if (bean instanceof FactoryBean) {
@@ -863,6 +867,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 					}
 				}
 				else {
+					// 这里是普通Bean进来的地方
 					getBean(beanName);
 				}
 			}
@@ -1205,6 +1210,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 		InjectionPoint previousInjectionPoint = ConstructorResolver.setCurrentInjectionPoint(descriptor);
 		try {
+			// 这里是处理依赖的代码
 			Object shortcut = descriptor.resolveShortcut(this);
 			if (shortcut != null) {
 				return shortcut;

@@ -64,7 +64,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	public AnnotationConfigApplicationContext() {
 		// key:spring提供的Api，调用Register... 完成BeanDefinition的初始化的封装
+		// 这里会将几个重要的后置处理器的Bean放到BeanMap中
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+		// 这个没什么用，不用在意
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 
@@ -85,8 +87,15 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
+		// 这里首先会调用父类的构造方法
+		// key1 :GenericApplicationContext#this.beanFactory = new DefaultListableBeanFactory()。
+		// DefaultListableBeanFactory 是生成Bean的Bean工厂。
+		// 里面有一个很关键的属性beanDefinitionMap是存放我们的BeanDefinition定义的
 		this();
+		// 这里其实就是将我们的LyjConfig注册到BeanDefinitionMap中
+		// DefaultListableBeanFactory#registerBeanDefinition
 		register(componentClasses);
+		// Spring容器初始化的核心方法
 		refresh();
 	}
 
@@ -97,6 +106,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * @param basePackages the packages to scan for component classes
 	 */
 	public AnnotationConfigApplicationContext(String... basePackages) {
+
 		this();
 		scan(basePackages);
 		refresh();

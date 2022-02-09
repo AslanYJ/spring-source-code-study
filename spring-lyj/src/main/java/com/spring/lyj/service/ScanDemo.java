@@ -1,7 +1,6 @@
 package com.spring.lyj.service;
 
 import com.spring.lyj.LyjConfig;
-import com.spring.lyj.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

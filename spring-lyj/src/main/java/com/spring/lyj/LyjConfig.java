@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Import;
 
 // @Configuration 是最先解析的
 @Configuration
-@ComponentScan({"com.spring.lyj","com.spring.lyj.proxy"})
-
+@ComponentScan({"com.spring.lyj","com.spring.lyj.proxy","com.spring.lyj.service"})
 public class LyjConfig {
 }

@@ -165,6 +165,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	@Override
 	@Nullable
 	public Object getSingleton(String beanName) {
+		// 这里会有是变量，是否支持循环依赖。默认是支持的
 		return getSingleton(beanName, true);
 	}
 
