@@ -48,6 +48,7 @@ final class LogAdapter {
 	private static final LogApi logApi;
 
 	static {
+		// Spring实例化自己的日志的时候，比较倾向于Log4j
 		if (isPresent(LOG4J_SPI)) {
 			if (isPresent(LOG4J_SLF4J_PROVIDER) && isPresent(SLF4J_SPI)) {
 				// log4j-to-slf4j bridge -> we'll rather go with the SLF4J SPI;
