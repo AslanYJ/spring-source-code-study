@@ -75,6 +75,7 @@ public class StandardEnvironment extends AbstractEnvironment {
 	 */
 	@Override
 	protected void customizePropertySources(MutablePropertySources propertySources) {
+		// 初始化环境变量参数，优先考虑JVM。。。 拿环境变量值的时候，从两个Map中遍历，拿到一个就返回
 		propertySources.addLast(
 				new PropertiesPropertySource(SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME, getSystemProperties()));
 		propertySources.addLast(

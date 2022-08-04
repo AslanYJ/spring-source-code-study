@@ -46,6 +46,7 @@ import org.springframework.util.ClassUtils;
  * @since 3.0
  * @see BeanMethod
  * @see ConfigurationClassParser
+ * 这是用来描述配置类的---首个配置类
  */
 final class ConfigurationClass {
 
@@ -55,14 +56,15 @@ final class ConfigurationClass {
 
 	@Nullable
 	private String beanName;
-
+	// import进来的类
 	private final Set<ConfigurationClass> importedBy = new LinkedHashSet<>(1);
-
+	// 所有加了@Bean 注解的方法
 	private final Set<BeanMethod> beanMethods = new LinkedHashSet<>();
-
+	// xml不用太在意
 	private final Map<String, Class<? extends BeanDefinitionReader>> importedResources =
 			new LinkedHashMap<>();
 
+	// 当前配置类上面所有Import的类类型是ImportBeanDefinitionRegistrar
 	private final Map<ImportBeanDefinitionRegistrar, AnnotationMetadata> importBeanDefinitionRegistrars =
 			new LinkedHashMap<>();
 
